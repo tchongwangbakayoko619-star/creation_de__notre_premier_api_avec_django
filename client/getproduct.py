@@ -1,15 +1,7 @@
 import requests
-
-endpoint = 'http://localhost:8000/api/product/'  # vérifie bien ton URL
-data = {
-    "name": "patate",
-    "price": 9.99,
-    "description": "fruit",
-    "Email": "user@example.com"
-}
-
+endpoint = 'http://localhost:8000/api/product/2/'
 try:
-    response = requests.post(endpoint, json=data)
+    response = requests.get(endpoint)
     print("Status Code:", response.status_code)
     try:                                                                                    
         print("Response JSON:", response.json())
