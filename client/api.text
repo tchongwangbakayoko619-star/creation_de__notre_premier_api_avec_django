@@ -1,0 +1,11 @@
+1===> c'est qoui une api
+    +API: application programing interface 
+2===> c'est qoui une api rest: REST: representation state transfert  
+3===> c'est qoui un point de terminaison : url: endpoint https:/bakayoko.com/api/v1/login
+4===> c'est qoui le format json: javascript object notation 
+5===> c'est qoui la validation d'une api
+6===> c'est qoui le status code d'une api 100 a 500 404(parge introuvable)
+7===> c'est qoui la serealisation 
+8===> c'est qoui la deserealisation 
+9===> c'est qoui une api web 
+10==> comment developper une api
