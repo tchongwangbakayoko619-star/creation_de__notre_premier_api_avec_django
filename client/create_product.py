@@ -1,6 +1,6 @@
 import requests
 
-endpoint = 'http://localhost:8000/api/product/'  # vérifie bien ton URL
+endpoint = 'http://localhost:8000/api/V1/product/'  # vérifie bien ton URL
 data = {
     "name": "patate",
     "price": 9.99,

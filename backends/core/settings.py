@@ -42,7 +42,14 @@ INSTALLED_APPS = [
     #local apps
     'api',
 ]
-
+Rest_framework = {
+    'DEFAULT_PASSER_CLASSES': [
+        'Rest_framework.passers.JSONParser',
+        'Rest_framework.passers.FormParser',
+        'Rest_framework.renderers.BrowsableAPIRenderer',
+    ]
+}
+        
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -107,6 +114,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
+
+# Disable APPEND_SLASH to prevent POST redirect issues
+APPEND_SLASH = False
 
 TIME_ZONE = 'UTC'
 
