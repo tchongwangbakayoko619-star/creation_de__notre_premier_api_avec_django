@@ -1,17 +1,39 @@
-from api.models import Product
 from rest_framework import serializers
+from api.models import Product
 
 class ProductSerializer(serializers.ModelSerializer):
-    Email = serializers.EmailField(write_only=True, required=False)  # Champ pour recevoir l'email dans la requête POST
+    Email = serializers.EmailField(write_only=True, required=False)
+    name = serializers.CharField(max_length=100)
+    price = serializers.DecimalField(max_digits=10, decimal_places=2)
+    price_in_fcfa = serializers.SerializerMethodField(read_only=True)
+    description_summary = serializers.SerializerMethodField(read_only=True)
+    link = serializers.HyperlinkedIdentityField(view_name='product_api_view_detail', lookup_field='pk')
+    
     class Meta:
         model = Product
-        fields = '__all__'
-        read_only_fields = ('id', 'created_at', 'update_at')
+        fields = ['id', 'name', 'Email', 'price', 'price_in_fcfa', 'description_summary', 'link']
+        extra_kwargs = {
+            'price': {'required': True}
+        }
+
+    def get_price_in_fcfa(self, obj):
+        return obj.get_price_in_fcfa()
+    
+    def get_description_summary(self, obj):
+        return obj.get_description()
+    
+    def validate_name(self, value):
+        if value.lower() in ['bakayoko', 'mamadou']:
+            raise serializers.ValidationError("Invalid product name")
+        return value
+    
     def create(self, validated_data):
-        self.Email = validated_data.pop('Email', None)  # Extraire l'email si présent
-        print(f"Email reçu dans le serializer: {self.Email}")  # Afficher l'email pour vérification
-        return super().create(validated_data) 
-       
+        email = validated_data.pop('Email', None)
+        if email:
+            print(f"Email reçu dans le serializer: {email}")
+        return super().create(validated_data)
+
+
 class ProductSerializer2(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     name = serializers.CharField(max_length=100)
@@ -19,3 +41,10 @@ class ProductSerializer2(serializers.Serializer):
     description = serializers.CharField()
     created_at = serializers.DateTimeField(read_only=True)
     update_at = serializers.DateTimeField(read_only=True)
+    price_in_fcfa = serializers.SerializerMethodField()
+
+    def get_price_in_fcfa(self, obj):
+        return f"{obj.price} FCFA"
+
+       
+
