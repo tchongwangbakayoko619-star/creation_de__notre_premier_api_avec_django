@@ -114,4 +114,4 @@ Ce projet est sous licence MIT.
 
 ## Auteur
 
-YAMDJEU YVETTE
+TCHONGWANG BAKAYOKO
