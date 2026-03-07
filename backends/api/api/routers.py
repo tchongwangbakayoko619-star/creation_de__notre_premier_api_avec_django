@@ -1,5 +1,5 @@
 from django.urls import path
-from api.api.view_set import ProductViewSet
+from api.api.view_set import ProductViewSet, UserViewSet
 from rest_framework.routers import DefaultRouter, SimpleRouter
 from api.api.mixins import CombineAPViewlet
 
@@ -10,4 +10,5 @@ simple_router est plus léger et uttilise pour les simples operation de lecture 
 """
 router= DefaultRouter()
 router.register('V1/product', ProductViewSet, basename='product')
+router.register('V1/users', UserViewSet, basename='user')
 urlpatterns = router.urls

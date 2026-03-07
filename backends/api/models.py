@@ -7,6 +7,7 @@ class Product(models.Model):
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
+    author = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name='products', null=True, blank=True)  
     
     def get_price_in_fcfa(self):
         return f'{self.price} FCFA'
